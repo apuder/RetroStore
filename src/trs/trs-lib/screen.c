@@ -13,6 +13,11 @@ void init_hardware()
   static uint8_t background_buffer[SCREEN_WIDTH * SCREEN_HEIGHT];
   set_screen(SCREEN_BASE, background_buffer,
 	     SCREEN_WIDTH, SCREEN_HEIGHT);
+
+  // Determine if the screen has lowercase by writing/reading screen memory.
+  // An unmodified M1 will read back 32 instead of 96.
+  *(volatile uint8_t *)SCREEN_BASE = 96;
+  screen.is_uc = *(volatile uint8_t *)SCREEN_BASE != 96;
 }
 #endif
 

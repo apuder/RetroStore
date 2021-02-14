@@ -13,6 +13,7 @@ typedef void (*screen_update_range_t)(uint8_t*, uint8_t*);
 typedef struct {
   uint8_t  width;
   uint8_t  height;
+  uint8_t is_uc;
   uint8_t* screen_base;
   uint8_t* background;
   uint8_t* current;
@@ -20,6 +21,9 @@ typedef struct {
 } SCREEN;
 
 extern SCREEN screen;
+
+// Convert character to uppercase if screen is uppercase-only to avoid gibberish.
+#define SCREEN_TO_UC(UC, C)  (((UC) && ((C) >= 96 && (C) < 128)) ? ((C)-32) : (C))
 
 void init_hardware();
 void set_screen(uint8_t* screen_base,

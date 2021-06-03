@@ -4,7 +4,7 @@
 #define CHECK() if(trs_fs == NULL || trs_fs->get_err_msg() != NULL) return FR_NOT_READY;
 
 void f_log(const char* format, ...) {
-#if 0
+#if 1
   char* msg;
   va_list args;
   va_start(args, format);
